@@ -1,12 +1,3 @@
-/*
-
-<object width="640" height="360">
-    <param name="movie" value="http://www.youtube.com/embed/ybZTmpBEVfw?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" <param="">
-    <param name="allowscriptaccess" value="always">
-    <embed width="640" height="360" src="http://www.youtube.com/embed/ybZTmpBEVfw?html5=1&amp;rel=0&amp;hl=en_US&amp;version=3" class="youtube-player" type="text/html" allowscriptaccess="always" allowfullscreen="true">
-</object>
-
-*/
 (function(factory){
     if(typeof define==='function'&&define.amd){
         define(['jquery'],factory);
@@ -24,16 +15,13 @@
                 pluginTitle:'Video Attributes',
                 href:'URL',
                 videoSize:'Video size',
-                videoSelectOption0:'Responsive',
-                videoSelectOption1:'1280x720',
-                videoSelectOption2:'853x480',
-                videoSelectOption3:'640x360',
-                videoSelectOption4:'560x315',
-                videoSelectOption5:'Custom',
-                videoSizeCustomPlaceholder:'Enter Custom Size...',
+                videoOption0:'Responsive',
+                videoOption1:'1280x720',
+                videoOption2:'853x480',
+                videoOption3:'640x360',
+                videoOption4:'560x315',
                 suggested:'Show Suggested videos when the video finishes',
-                controls:'Show player controls',
-                useIframe:'Use Default IFrame embedding'
+                controls:'Show player controls'
             }
         }
     });
@@ -72,22 +60,20 @@
                         '<div class="form-group">'+
                             '<label for="note-video-attributes-video-size" class="control-label col-xs-3">'+lang.videoAttributes.videoSize+'</label>'+
                             '<div class="input-group col-xs-9">'+
-                                '<select id="note-video-attributes-video-size" class="note-video-attributes-video-size form-control">'+
-                                    '<option value="0" selected>'+lang.videoAttributes.videoSelectOption0+'</option>'+
-                                    '<option value="1">'+lang.videoAttributes.videoSelectOption1+'</option>'+
-                                    '<option value="2">'+lang.videoAttributes.videoSelectOption2+'</option>'+
-                                    '<option value="3">'+lang.videoAttributes.videoSelectOption3+'</option>'+
-                                    '<option value="4">'+lang.videoAttributes.videoSelectOption4+'</option>'+
-                                    '<option value="5">'+lang.videoAttributes.videoSelectOption5+'</option>'+
+                                '<select id="note-video-attributes-size" class="note-video-attributes-size form-control col-xs-6">'+
+                                    '<option value="0" selected>'+lang.videoAttributes.videoOption0+'</option>'+
+                                    '<option value="1">'+lang.videoAttributes.videoOption1+'</option>'+
+                                    '<option value="2">'+lang.videoAttributes.videoOption2+'</option>'+
+                                    '<option value="3">'+lang.videoAttributes.videoOption3+'</option>'+
+                                    '<option value="4">'+lang.videoAttributes.videoOption4+'</option>'+
                                 '</select>'+
-                                '<input type="text" id="note-video-attributes-video-size-custom" class="note-video-attributes-video-size-custom form-control" placeholder="'+lang.videoAttributes.videoSizeCustomPlaceholder+'">'+
                             '</div>'+
                         '</div>'+
                         '<div class="form-group clearfix">'+
                             '<div class="control-label col-xs-3"></div>'+
                             '<div class="input-group col-xs-9">'+
                                 '<div class="checkbox checkbox-success">'+
-                                    '<input type="checkbox" id="note-video-attributes-suggested-checkbox" class="note-video-attributes-suggested-checkbox" value="1" checked>'+
+                                    '<input type="checkbox" id="note-video-attributes-suggested-checkbox" class="note-video-attributes-suggested-checkbox" checked>'+
                                     '<label for="note-video-attributes-suggested-checkbox">'+lang.videoAttributes.suggested+'</label>'+
                                 '</div>'+
                             '</div>'+
@@ -96,21 +82,11 @@
                             '<div class="control-label col-xs-3"></div>'+
                             '<div class="input-group col-xs-9">'+
                                 '<div class="checkbox checkbox-success">'+
-                                    '<input type="checkbox" id="note-video-attributes-controls-checkbox" class="note-video-attributes-controls-checkbox" value="1" checked>'+
+                                    '<input type="checkbox" id="note-video-attributes-controls-checkbox" class="note-video-attributes-controls-checkbox" checked>'+
                                     '<label for="note-video-attributes-controls-checkbox">'+lang.videoAttributes.controls+'</label>'+
                                 '</div>'+
                             '</div>'+
-                        '</div>'+
-                        '<div class="form-group clearfix">'+
-                            '<div class="control-label col-xs-3"></div>'+
-                            '<div class="input-group col-xs-9">'+
-                                '<div class="checkbox checkbox-success">'+
-                                    '<input type="checkbox" id="note-video-attributes-useiframe-checkbox" class="note-video-attributes-useiframe-checkbox" value="1" checked>'+
-                                    '<label for="note-video-attributes-useiframe-checkbox">'+lang.videoAttributes.useIframe+'</label>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'
-                        ;
+                        '</div>';
                 this.$dialog=ui.dialog({
                     title:lang.videoAttributes.dialogTitle,
                     body:body,
@@ -138,32 +114,80 @@
                     vidDom:$vid,
                     href:$vid.attr('href'),
                     size:$vid.attr('size'),
-                    custom:$vid.attr('custom'),
                     suggested:$vid.attr('suggested'),
-                    controls:$vid.attr('controls'),
-                    useiframe:$vid.attr('useiframe')
+                    controls:$vid.attr('controls')
                 };
                 this.showLinkDialog(vidInfo)
                     .then(function(vidInfo){
                         ui.hideDialog(self.$dialog);
                         var $vid=vidInfo.vidDom;
-                        if(vidInfo.useiframe===1){
-                            var videohtml='iframe';
-                        }else{
-                            var videohtml='embed';
+                        var $videoHref=self.$dialog.find('.note-video-attributes-href'),
+                            $videoSize=self.$dialog.find('.note-video-attributes-size'),
+                            $videoSuggested=self.$dialog.find('.note-video-attributes-suggested-checkbox'),
+                            $videoControls=self.$dialog.find('.note-video-attributes-controls-checkbox');
+                        var videoURL=$videoHref.val()+'?';
+                        if(!$videoSuggested.is(':checked')){
+                            videoURL+='rel=0&amp;';
                         }
-                        $note.val(context.invoke('code'));
-                        $note.change();
+                        if(!$videoControls.is(':checked')){
+                            videoURL+='controls=0&amp;';
+                        }
+                        if($videoSize.val()==0){
+                            var videoDIV=$('<div>',{
+                                class:'embed-responsive embed-responsive-16by9'
+                            });
+                            var videoFrame=$('<iframe>',{
+                                class:'embed-responsive-item note-video-clip',
+                                src:videoURL,
+                                frameborder:0
+                            });
+                            videoDIV.html(videoFrame);
+                        }
+                        if($videoSize.val()==1){
+                            var videoDIV=$('<iframe>',{
+                                class:'note-video-clip',
+                                src:videoURL,
+                                width:'1280',
+                                height:'720',
+                                frameborder:'0'
+                            });
+                        }
+                        if($videoSize.val()==2){
+                            var videoDIV=$('<iframe>',{
+                                class:'note-video-clip',
+                                src:videoURL,
+                                width:'853',
+                                height:'480',
+                                frameborder:'0'
+                            });
+                        }
+                        if($videoSize.val()==3){
+                            var videoDIV=$('<iframe>',{
+                                class:'note-video-clip',
+                                src:videoURL,
+                                width:'640',
+                                height:'360',
+                                frameborder:'0'
+                            });
+                        }
+                        if($videoSize.val()==4){
+                            var videoDIV=$('<iframe>',{
+                                class:'note-video-clip',
+                                src:videoURL,
+                                width:'560',
+                                height:'315',
+                                frameborder:'0'
+                            });
+                        }
+                        context.invoke('editor.insertNode',videoDIV[0]);
                     });
             };
             this.showLinkDialog=function(vidInfo){
                 return $.Deferred(function(deferred){
                     var $videoHref=self.$dialog.find('.note-video-attributes-href'),
-                        $videoSize=self.$dialog.find('.note-video-attributes-video-size'),
-                        $videoCustom=self.$dialog.find('.note-video-attributes-size-custom'),
+                        $videoSize=self.$dialog.find('.note-video-attributes-size'),
                         $videoSuggested=self.$dialog.find('.note-video-attributes-suggested-checkbox'),
                         $videoControls=self.$dialog.find('.note-video-attributes-controls-checkbox'),
-                        $videoUseIframe=self.$dialog.find('.note-video-attributes-useiframe-checkbox'),
                         $editBtn=self.$dialog.find('.note-video-attributes-btn');
                     ui.onDialogShown(self.$dialog,function(){
                         context.triggerEvent('dialog.shown');
@@ -173,23 +197,17 @@
                                 vidDom:vidInfo.vidDom,
                                 href:$videoHref.val(),
                                 size:$videoSize.val(),
-                                custom:$videoCustom.val(),
                                 suggested:$videoSuggested.val(),
-                                controls:$videoControls.val(),
-                                useiframe:$videoUseIframe.val(),
-                                role:$videoRole.val()
+                                controls:$videoControls.val()
                             });
                         });
                         $videoHref.val(vidInfo.href).focus;
-                        $videoSize.val(vidInfo.size);
-                        $videoCustom.val(vidInfo.custom);
-                        $videoSuggested.val(vidInfo.suggested);
-                        $videoControls.val(vidInfo.controls);
-                        $videoSuggested.val(vidInfo.suggested);
-                        $videoUseIframe.val(vidInfo.useiframe);
+//                        if($videoSize.val()!='')$videoSize.val(vidInfo.size);
+//                        $videoSuggested.val(vidInfo.suggested);
+//                        $videoControls.val(vidInfo.controls);
+//                        $videoSuggested.val(vidInfo.suggested);
                         self.bindEnterKey($editBtn);
                         self.bindLabels();
-                        self.bindClassesSelector();
                     });
                     ui.onDialogHidden(self.$dialog,function(){
                         $editBtn.off('click');
