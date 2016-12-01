@@ -35,3 +35,4 @@ $(document).ready(function() {
 
 ### TODO
 - Add Regex to check for services other than YouTube and insert correct embedding options for those services.
+- Add Class/Style Editing for floating sized videos for page justification.
