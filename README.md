@@ -33,6 +33,13 @@ $(document).ready(function() {
 });
 ```
 
-### TODO
-- Add Regex to check for services other than YouTube and insert correct embedding options for those services.
-- Add Class/Style Editing for floating sized videos for page justification.
+#### 3. Check out our other Summernote Plugins
+- [Summernote Image Attributes](https://github.com/StudioJunkyard/summernote-image-attributes)
+  - Add Button to Image Popup to enable editing various Image Attributes, including adding Links.
+- [Summernote Cleaner](https://github.com/StudioJunkyard/summernote-cleaner)
+  - Clean Pasted and Existing Markup, mainly for cleaning text from Office Document software.
+- [Summernote Save Button](https://github.com/StudioJunkyard/summernote-save-button)
+  - Add a Save Button to the Toolbar when Summernote is inside a form with a Textarea to easily save your document.
+- [Summernote SEO](https://github.com/StudioJunkyard/summernote-seo)
+  - Adds a Dropdown to the Toolbar that allows extracting selected text and inserts it into input elements for editing.
+  
