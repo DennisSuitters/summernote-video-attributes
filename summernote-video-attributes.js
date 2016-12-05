@@ -20,14 +20,21 @@
                 videoOption2:'853x480',
                 videoOption3:'640x360',
                 videoOption4:'560x315',
+                alignment:'Alignment',
+                alignmentOption0:'None',
+                alignmentOption1:'Left',
+                alignmentOption2:'Right',
+                alignmentOption3:'Initial',
+                alignmentOption4:'Inherit',
                 suggested:'Show Suggested videos when the video finishes',
-                controls:'Show player controls'
+                controls:'Show player controls',
+                ok:'OK'
             }
         }
     });
     $.extend($.summernote.options,{
         videoAttributes:{
-            icon:'<i class="note-icon"><svg xmlns="http://www.w3.org/2000/svg" id="libre-social-youtube" viewBox="0 0 14 14"><path d="m 3.326049,1.000005 0.720437,0 0.493194,1.851 0.45833,-1.851 0.726728,0 -0.832427,2.75254 0,1.87824 -0.715282,0 0,-1.87824 -0.85098,-2.75254 z m 2.366301,3.77881 c 0,0.60198 0.314563,0.91537 0.930553,0.91537 0.510816,0 0.913107,-0.34162 0.913107,-0.91537 l 0,-1.67444 c 0,-0.53467 -0.398272,-0.91774 -0.913107,-0.91774 -0.55934,0 -0.930553,0.36964 -0.930553,0.91774 l 0,1.67444 z m 0.653592,-1.61811 c 0,-0.18696 0.0861,-0.32575 0.264495,-0.32575 0.194796,0 0.278126,0.13462 0.278126,0.32575 l 0,1.58898 c 0,0.18597 -0.09478,0.32342 -0.265689,0.32342 -0.175398,0 -0.276932,-0.14348 -0.276932,-0.32342 l 0,-1.58898 z m 2.906942,-0.94596 0,2.59296 c -0.07739,0.0969 -0.249583,0.25581 -0.373428,0.25581 -0.135902,0 -0.169194,-0.0928 -0.169194,-0.23015 l 0,-2.61862 -0.635126,0 0,2.85521 c 0,0.33746 0.103194,0.61017 0.443651,0.61017 0.192174,0 0.458883,-0.1 0.734068,-0.42644 l 0,0.3771 0.635126,0 0,-3.41604 -0.635097,0 z m -0.934253,7.00276 c 0.04311,0.0569 0.06466,0.14024 0.06466,0.24999 l 0,1.67976 c 0,0.10372 -0.0175,0.17846 -0.05237,0.22422 -0.06667,0.0873 -0.211048,0.0833 -0.309466,0.0335 -0.04628,-0.0233 -0.09399,-0.0614 -0.143184,-0.11435 l 0,-2.02739 c 0.04104,-0.0446 0.08257,-0.0777 0.124689,-0.0991 0.105874,-0.0536 0.242534,-0.0432 0.31567,0.0534 z m 2.036185,-0.0737 c -0.224127,0 -0.270204,0.15771 -0.270204,0.38129 l 0,0.32933 0.534378,0 0,-0.32933 c -2.9e-5,-0.21988 -0.04666,-0.38129 -0.264174,-0.38129 z m 1.844679,2.39988 c 0,0.80429 -0.652019,1.45631 -1.45631,1.45631 l -7.486369,0 c -0.804292,10e-6 -1.456311,-0.65201 -1.456311,-1.4563 l 0,-3.67911 c 0,-0.80432 0.652019,-1.45631 1.456311,-1.45631 l 7.486339,0 c 0.804292,0 1.456311,0.65199 1.456311,1.45631 l 0,3.67911 z m -7.945107,-3.40404 0.704709,0 0,-0.64014 -2.090621,0 0,0.64014 0.704709,0 0,3.7701 0.681203,0 0,-3.7701 z m 2.42301,0.51679 -0.604893,0 0,2.46946 c -0.07381,0.0924 -0.237757,0.24364 -0.35566,0.24364 -0.129379,0 -0.161097,-0.0883 -0.161097,-0.21923 l 0,-2.49387 -0.604893,0 0,2.71919 c 0,0.66012 0.447582,0.66417 0.773621,0.47741 0.120612,-0.0692 0.236534,-0.17007 0.348029,-0.30242 l 0,0.35913 0.604893,0 0,-3.25331 z m 2.328408,0.7744 c 0,-0.44126 -0.146709,-0.8155 -0.589718,-0.8155 -0.216,0 -0.401331,0.13768 -0.537816,0.30399 l 0,-1.41982 -0.610777,0 0,4.41024 0.610777,0 0,-0.25008 c 0.168612,0.21026 0.353039,0.2912 0.574515,0.2912 0.402466,0 0.553019,-0.31261 0.553019,-0.71519 l 0,-1.80484 z m 2.23567,0.10026 c 0,-0.588 -0.280398,-0.95689 -0.86068,-0.95689 -0.54565,0 -0.918728,0.39213 -0.918728,0.95689 l 0,1.46027 c 0,0.58564 0.295369,1.00651 0.872942,1.00651 0.637398,0 0.906466,-0.37963 0.906466,-1.00651 l 0,-0.24437 -0.622515,0 0,0.22611 c 0,0.28325 -0.01488,0.45509 -0.270204,0.45509 -0.243524,0 -0.264145,-0.21104 -0.264145,-0.45509 l 0,-0.61372 1.156893,0 0,-0.82829 z"/></svg></i>'
+            icon:'<i class="note-icon"><svg xmlns="http://www.w3.org/2000/svg" id="libre-camera" viewBox="0 0 14 14"><path d="m 12.503106,4.03105 -3.087752,0 -0.09237,-0.72049 c 0,-0.41163 -0.333714,-0.74534 -0.745341,-0.74534 l -3.180124,0 c -0.411628,0 -0.745342,0.33372 -0.745342,0.74534 l -0.09237,0.72049 -3.062907,0 C 1.22246,4.03105 1,4.24109 1,4.51553 l 0,6.40993 c 0,0.27444 0.22246,0.50932 0.496894,0.50932 l 11.006212,0 C 12.77754,11.43478 13,11.1999 13,10.92546 L 13,4.51553 C 13,4.24109 12.77754,4.03105 12.503106,4.03105 Z M 7.00236,10.77794 c -1.687652,0 -3.055751,-1.3681 -3.055751,-3.05573 0,-1.68765 1.368099,-3.05574 3.055751,-3.05574 1.687652,0 3.055752,1.3681 3.055752,3.05574 0,1.6876 -1.3681,3.05573 -3.055752,3.05573 z m 5.426211,-5.43012 -2.608695,0 0,-0.77017 2.608695,0 0,0.77017 z M 8.876472,7.71575 A 1.8687454,1.8687454 0 0 1 7.007727,9.58449 1.8687454,1.8687454 0 0 1 5.138981,7.71575 1.8687454,1.8687454 0 0 1 7.007727,5.84701 1.8687454,1.8687454 0 0 1 8.876472,7.71575 Z"/></svg></i>'
         }
     });
     $.extend($.summernote.plugins,{
@@ -69,6 +76,18 @@
                                 '</select>'+
                             '</div>'+
                         '</div>'+
+                        '<div class="form-group">'+
+                            '<label for="note-video-attributes-video-alignment" class="control-label col-xs-3">'+lang.videoAttributes.alignment+'</label>'+
+                            '<div class="input-group col-xs-9">'+
+                                '<select id="note-video-attributes-alignment" class="note-video-attributes-alignment form-control col-xs-6">'+
+                                    '<option value="none" selected>'+lang.videoAttributes.alignmentOption0+'</option>'+
+                                    '<option value="left">'+lang.videoAttributes.alignmentOption1+'</option>'+
+                                    '<option value="right">'+lang.videoAttributes.alignmentOption2+'</option>'+
+                                    '<option value="initial">'+lang.videoAttributes.alignmentOption3+'</option>'+
+                                    '<option value="inherit">'+lang.videoAttributes.alignmentOption4+'</option>'+
+                                '</select>'+
+                            '</div>'+
+                        '</div>'+
                         '<div class="form-group clearfix">'+
                             '<div class="control-label col-xs-3"></div>'+
                             '<div class="input-group col-xs-9">'+
@@ -90,7 +109,7 @@
                 this.$dialog=ui.dialog({
                     title:lang.videoAttributes.dialogTitle,
                     body:body,
-                    footer:'<button href="#" class="btn btn-primary note-video-attributes-btn">OK</button>'
+                    footer:'<button href="#" class="btn btn-primary note-video-attributes-btn">'+lang.videoAttributes.ok+'</button>'
                 }).render().appendTo($container);
             };
             this.destroy=function(){
@@ -114,78 +133,137 @@
                     vidDom:$vid,
                     href:$vid.attr('href'),
                     size:$vid.attr('size'),
+                    alignment:$vid.attr('alignment'),
                     suggested:$vid.attr('suggested'),
                     controls:$vid.attr('controls')
                 };
+
                 this.showLinkDialog(vidInfo)
                     .then(function(vidInfo){
                         ui.hideDialog(self.$dialog);
                         var $vid=vidInfo.vidDom;
                         var $videoHref=self.$dialog.find('.note-video-attributes-href'),
                             $videoSize=self.$dialog.find('.note-video-attributes-size'),
+                            $videoAlignment=self.$dialog.find('.note-video-attributes-alignment'),
                             $videoSuggested=self.$dialog.find('.note-video-attributes-suggested-checkbox'),
                             $videoControls=self.$dialog.find('.note-video-attributes-controls-checkbox');
-                        var videoURL=$videoHref.val()+'?';
-                        if(!$videoSuggested.is(':checked')){
-                            videoURL+='rel=0&amp;';
-                        }
-                        if(!$videoControls.is(':checked')){
-                            videoURL+='controls=0&amp;';
-                        }
+                        var url=$videoHref.val();
+                        var $videoHTML=$('<div>');
                         if($videoSize.val()==0){
-                            var videoDIV=$('<div>',{
-                                class:'embed-responsive embed-responsive-16by9'
-                            });
-                            var videoFrame=$('<iframe>',{
-                                class:'embed-responsive-item note-video-clip',
-                                src:videoURL,
-                                frameborder:0
-                            });
-                            videoDIV.html(videoFrame);
+                          $videoHTML.addClass('embed-responsive embed-responsive-16by9');
+                          $videoHTML.css({
+                            'float':$videoAlignment.val()
+                          })
+                          var videoWidth='auto',
+                              videoHeight='auto';
                         }
                         if($videoSize.val()==1){
-                            var videoDIV=$('<iframe>',{
-                                class:'note-video-clip',
-                                src:videoURL,
-                                width:'1280',
-                                height:'720',
-                                frameborder:'0'
-                            });
+                          var videoWidth='1280',
+                              videoHeight='720';
                         }
                         if($videoSize.val()==2){
-                            var videoDIV=$('<iframe>',{
-                                class:'note-video-clip',
-                                src:videoURL,
-                                width:'853',
-                                height:'480',
-                                frameborder:'0'
-                            });
+                          var videoWidth='853',
+                              videoHeight='480';
                         }
                         if($videoSize.val()==3){
-                            var videoDIV=$('<iframe>',{
-                                class:'note-video-clip',
-                                src:videoURL,
-                                width:'640',
-                                height:'360',
-                                frameborder:'0'
-                            });
+                          var videoWidth='640',
+                              videoHeight='360';
                         }
                         if($videoSize.val()==4){
-                            var videoDIV=$('<iframe>',{
-                                class:'note-video-clip',
-                                src:videoURL,
-                                width:'560',
-                                height:'315',
-                                frameborder:'0'
-                            });
+                          var videoWidth='560',
+                              videoHeight='315';
                         }
-                        context.invoke('editor.insertNode',videoDIV[0]);
+// These Regex's are from the Summernote Source.
+                        var ytRegExp=/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+                        var ytMatch=url.match(ytRegExp);
+                        var igRegExp=/(?:www\.|\/\/)instagram\.com\/p\/(.[a-zA-Z0-9_-]*)/;
+                        var igMatch=url.match(igRegExp);
+                        var vRegExp=/\/\/vine\.co\/v\/([a-zA-Z0-9]+)/;
+                        var vMatch=url.match(vRegExp);
+                        var vimRegExp=/\/\/(player\.)?vimeo\.com\/([a-z]*\/)*([0-9]{6,11})[?]?.*/;
+                        var vimMatch=url.match(vimRegExp);
+                        var dmRegExp=/.+dailymotion.com\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/;
+                        var dmMatch=url.match(dmRegExp);
+                        var youkuRegExp=/\/\/v\.youku\.com\/v_show\/id_(\w+)=*\.html/;
+                        var youkuMatch=url.match(youkuRegExp);
+                        var mp4RegExp=/^.+.(mp4|m4v)$/;
+                        var mp4Match=url.match(mp4RegExp);
+                        var oggRegExp=/^.+.(ogg|ogv)$/;
+                        var oggMatch=url.match(oggRegExp);
+                        var webmRegExp=/^.+.(webm)$/;
+                        var webmMatch=url.match(webmRegExp);
+                        var $video;
+                        var urlVars='';
+// These Element Builder's are from the Summernote Source.
+                        if(ytMatch&&ytMatch[1].length===11){ // YouTube
+                          if(!$videoSuggested.is(':checked')){
+                            urlVars+='rel=1';
+                          }
+                          if(!$videoControls.is(':checked')){
+                            urlVars+='&controls=1';
+                          }
+                          var youtubeId=ytMatch[1];
+                          $video=$('<iframe>')
+                              .attr('frameborder',0)
+                              .attr('src','//www.youtube.com/embed/'+youtubeId+'?'+urlVars)
+                              .attr('width',videoWidth)
+                              .attr('height',videoHeight);
+                        }else if(igMatch&&igMatch[0].length){
+                          $video=$('<iframe>')
+                              .attr('frameborder',0)
+                              .attr('src','https://instagram.com/p/'+igMatch[1]+'/embed/')
+                              .attr('width',videoWidth)
+                              .attr('height',videoHeight)
+                              .attr('scrolling','no')
+                              .attr('allowtransparency','true');
+                        }else if(vMatch&&vMatch[0].length){
+                          $video=$('<iframe>')
+                              .attr('frameborder',0)
+                              .attr('src',vMatch[0]+'/embed/simple')
+                              .attr('width',videoWidth)
+                              .attr('height',videoHeight)
+                              .attr('class','vine-embed');
+                        }else if(vimMatch&&vimMatch[3].length){
+                          $video=$('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
+                              .attr('frameborder', 0)
+                              .attr('src','//player.vimeo.com/video/'+vimMatch[3])
+                              .attr('width',videoWidth)
+                              .attr('height',videoHeight);
+                        }else if(dmMatch&&dmMatch[2].length){
+                          $video=$('<iframe>')
+                              .attr('frameborder',0)
+                              .attr('src','//www.dailymotion.com/embed/video/'+dmMatch[2])
+                              .attr('width',videoWidth)
+                              .attr('height',videoHeight);
+                        }else if(youkuMatch&&youkuMatch[1].length){
+                          $video=$('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
+                              .attr('frameborder',0)
+                              .attr('width',videoWidth)
+                              .attr('height',videoHeight)
+                              .attr('src','//player.youku.com/embed/'+youkuMatch[1]);
+                        }else if(mp4Match||oggMatch||webmMatch){
+                          $video=$('<video controls>')
+                              .attr('src',url)
+                              .attr('width',videoWidth)
+                              .attr('height',videoHeight);
+                        }
+                        if($videoSize.val()==0){
+                          $video.addClass('embed-responsive');
+                        }else{
+                          $video.css({
+                            'float':$videoAlignment.val()
+                          });
+                        }
+                        $video.addClass('note-video-clip');
+                        $videoHTML.html($video);
+                        context.invoke('editor.insertNode',$videoHTML[0]);
                     });
             };
             this.showLinkDialog=function(vidInfo){
                 return $.Deferred(function(deferred){
                     var $videoHref=self.$dialog.find('.note-video-attributes-href'),
                         $videoSize=self.$dialog.find('.note-video-attributes-size'),
+                        $videoAlignment=self.$dialog.find('.note-video-attributes-alignment'),
                         $videoSuggested=self.$dialog.find('.note-video-attributes-suggested-checkbox'),
                         $videoControls=self.$dialog.find('.note-video-attributes-controls-checkbox'),
                         $editBtn=self.$dialog.find('.note-video-attributes-btn');
@@ -197,15 +275,16 @@
                                 vidDom:vidInfo.vidDom,
                                 href:$videoHref.val(),
                                 size:$videoSize.val(),
+                                alignment:$videoAlignment.val(),
                                 suggested:$videoSuggested.val(),
                                 controls:$videoControls.val()
                             });
                         });
                         $videoHref.val(vidInfo.href).focus;
 //                        if($videoSize.val()!='')$videoSize.val(vidInfo.size);
+//                        $videoAlignment.val(vidInfo.alignment);
 //                        $videoSuggested.val(vidInfo.suggested);
 //                        $videoControls.val(vidInfo.controls);
-//                        $videoSuggested.val(vidInfo.suggested);
                         self.bindEnterKey($editBtn);
                         self.bindLabels();
                     });
