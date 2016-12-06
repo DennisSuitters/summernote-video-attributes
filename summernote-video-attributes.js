@@ -159,18 +159,18 @@
             href:$vid.attr('href')
         };
         this.showLinkDialog(vidInfo)
-            .then(function(vidInfo){
-              ui.hideDialog(self.$dialog);
-            var $vid=vidInfo.vidDom;
-            var $videoHref=self.$dialog.find('.note-video-attributes-href'),
+          .then(function(vidInfo){
+            ui.hideDialog(self.$dialog);
+            var $vid=vidInfo.vidDom,
+                $videoHref=self.$dialog.find('.note-video-attributes-href'),
                 $videoSize=self.$dialog.find('.note-video-attributes-size'),
                 $videoAlignment=self.$dialog.find('.note-video-attributes-alignment'),
                 $videoSuggested=self.$dialog.find('.note-video-attributes-suggested-checkbox'),
                 $videoControls=self.$dialog.find('.note-video-attributes-controls-checkbox'),
                 $videoAutoplay=self.$dialog.find('.note-video-attributes-autoplay-checkbox'),
-                $videoLoop=self.$dialog.find('.note-video-attributes-loop-checkbox');
-            var url=$videoHref.val();
-            var $videoHTML=$('<div>');
+                $videoLoop=self.$dialog.find('.note-video-attributes-loop-checkbox'),
+                url=$videoHref.val(),
+                $videoHTML=$('<div>');
             if($videoSize.val()==0){
               $videoHTML.addClass('embed-responsive embed-responsive-16by9');
               $videoHTML.css({'float':$videoAlignment.val()});
@@ -246,37 +246,34 @@
                 .attr('width',videoWidth)
                 .attr('height',videoHeight);
             }
-            if($videoSize.val()==0)
-              $video.addClass('embed-responsive');
-            else
-              $video.css({'float':$videoAlignment.val()});
+            if($videoSize.val()==0)$video.addClass('embed-responsive');else $video.css({'float':$videoAlignment.val()});
             $video.addClass('note-video-clip');
             $videoHTML.html($video);
             context.invoke('editor.insertNode',$videoHTML[0]);
           });
         };
-        this.showLinkDialog=function(vidInfo){
-          return $.Deferred(function(deferred){
-            var $videoHref=self.$dialog.find('.note-video-attributes-href');
-                $editBtn=self.$dialog.find('.note-video-attributes-btn');
-            ui.onDialogShown(self.$dialog,function(){
-              context.triggerEvent('dialog.shown');
-              $editBtn.click(function(e){
-                e.preventDefault();
-                deferred.resolve({
-                  vidDom:vidInfo.vidDom,
-                  href:$videoHref.val()
-                });
+      this.showLinkDialog=function(vidInfo){
+        return $.Deferred(function(deferred){
+          var $videoHref=self.$dialog.find('.note-video-attributes-href');
+              $editBtn=self.$dialog.find('.note-video-attributes-btn');
+          ui.onDialogShown(self.$dialog,function(){
+            context.triggerEvent('dialog.shown');
+            $editBtn.click(function(e){
+              e.preventDefault();
+              deferred.resolve({
+                vidDom:vidInfo.vidDom,
+                href:$videoHref.val()
               });
-              $videoHref.val(vidInfo.href).focus;
-              self.bindEnterKey($editBtn);
-              self.bindLabels();
             });
-            ui.onDialogHidden(self.$dialog,function(){
-              $editBtn.off('click');
-              if(deferred.state()==='pending')deferred.reject();
-            });
-            ui.showDialog(self.$dialog);
+            $videoHref.val(vidInfo.href).focus;
+            self.bindEnterKey($editBtn);
+            self.bindLabels();
+          });
+          ui.onDialogHidden(self.$dialog,function(){
+            $editBtn.off('click');
+            if(deferred.state()==='pending')deferred.reject();
+          });
+          ui.showDialog(self.$dialog);
         });
       };
     }
