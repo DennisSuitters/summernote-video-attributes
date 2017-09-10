@@ -54,6 +54,7 @@
           contents:options.videoAttributes.icon,
           tooltip:lang.videoAttributes.tooltip,
           click:function(e){
+            context.invoke('saveRange');
             context.invoke('videoAttributes.show');
           }
         });
@@ -248,6 +249,7 @@
             if($videoSize.val()==0)$video.addClass('embed-responsive');else $video.css({'float':$videoAlignment.val()});
             $video.addClass('note-video-clip');
             $videoHTML.html($video);
+            context.invoke('restoreRange');
             context.invoke('editor.insertNode',$videoHTML[0]);
           });
         };
