@@ -246,7 +246,10 @@
                 .attr('width',videoWidth)
                 .attr('height',videoHeight);
             }
-            if($videoSize.val()==0)$video.addClass('embed-responsive');else $video.css({'float':$videoAlignment.val()});
+            if($videoSize.val()==0)
+              $video.addClass('embed-responsive');
+            else
+              $video.css({'float':$videoAlignment.val()});
             $video.addClass('note-video-clip');
             $videoHTML.html($video);
             context.invoke('restoreRange');
