@@ -1,3 +1,4 @@
+/* https://github.com/DiemenDesign/summernote-video-attributes */
 (function(factory){
   if(typeof define==='function'&&define.amd){
     define(['jquery'],factory);
@@ -62,76 +63,14 @@
       });
       this.initialize=function(){
         var $container=options.dialogsInBody?$(document.body):$editor;
-        var body='<div class="form-group">'+
-          '<div class="col-xs-3"></div>'+
-            '<div class="col-xs-9 help-block">'+lang.videoAttributes.note+'</div>'+
-          '</div>'+
-          '<div class="form-group">'+
-            '<label for="note-video-attributes-href" class="control-label col-xs-3">'+lang.videoAttributes.href+'</label>'+
-            '<div class="input-group col-xs-9">'+
-              '<input type="text" id="note-video-attributes-href" class="note-video-attributes-href form-control">'+
-            '</div>'+
-          '</div>'+
-          '<div class="form-group">'+
-            '<label for="note-video-attributes-video-size" class="control-label col-xs-3">'+lang.videoAttributes.videoSize+'</label>'+
-            '<div class="input-group col-xs-9">'+
-              '<select id="note-video-attributes-size" class="note-video-attributes-size form-control col-xs-6">'+
-                '<option value="0" selected>'+lang.videoAttributes.videoOption0+'</option>'+
-                '<option value="1">'+lang.videoAttributes.videoOption1+'</option>'+
-                '<option value="2">'+lang.videoAttributes.videoOption2+'</option>'+
-                '<option value="3">'+lang.videoAttributes.videoOption3+'</option>'+
-                '<option value="4">'+lang.videoAttributes.videoOption4+'</option>'+
-              '</select>'+
-            '</div>'+
-          '</div>'+
-          '<div class="form-group">'+
-            '<label for="note-video-attributes-video-alignment" class="control-label col-xs-3">'+lang.videoAttributes.alignment+'</label>'+
-            '<div class="input-group col-xs-9">'+
-              '<select id="note-video-attributes-alignment" class="note-video-attributes-alignment form-control col-xs-6">'+
-                '<option value="none" selected>'+lang.videoAttributes.alignmentOption0+'</option>'+
-                '<option value="left">'+lang.videoAttributes.alignmentOption1+'</option>'+
-                '<option value="right">'+lang.videoAttributes.alignmentOption2+'</option>'+
-                '<option value="initial">'+lang.videoAttributes.alignmentOption3+'</option>'+
-                '<option value="inherit">'+lang.videoAttributes.alignmentOption4+'</option>'+
-              '</select>'+
-            '</div>'+
-          '</div>'+
-          '<div class="form-group clearfix">'+
-            '<div class="control-label col-xs-3"></div>'+
-            '<div class="input-group col-xs-9">'+
-              '<div class="checkbox checkbox-success">'+
-                '<input type="checkbox" id="note-video-attributes-suggested-checkbox" class="note-video-attributes-suggested-checkbox" checked>'+
-                '<label for="note-video-attributes-suggested-checkbox">'+lang.videoAttributes.suggested+'</label>'+
-              '</div>'+
-            '</div>'+
-          '</div>'+
-          '<div class="form-group clearfix">'+
-            '<div class="control-label col-xs-3"></div>'+
-            '<div class="input-group col-xs-9">'+
-              '<div class="checkbox checkbox-success">'+
-                '<input type="checkbox" id="note-video-attributes-controls-checkbox" class="note-video-attributes-controls-checkbox" checked>'+
-                '<label for="note-video-attributes-controls-checkbox">'+lang.videoAttributes.controls+'</label>'+
-              '</div>'+
-            '</div>'+
-          '</div>'+
-          '<div class="form-group clearfix">'+
-            '<div class="control-label col-xs-3"></div>'+
-            '<div class="input-group col-xs-9">'+
-              '<div class="checkbox checkbox-success">'+
-                '<input type="checkbox" id="note-video-attributes-autoplay-checkbox" class="note-video-attributes-autoplay-checkbox">'+
-                '<label for="note-video-attributes-autoplay-checkbox">'+lang.videoAttributes.autoplay+'</label>'+
-              '</div>'+
-            '</div>'+
-          '</div>'+
-          '<div class="form-group clearfix">'+
-            '<div class="control-label col-xs-3"></div>'+
-            '<div class="input-group col-xs-9">'+
-              '<div class="checkbox checkbox-success">'+
-                '<input type="checkbox" id="note-video-attributes-loop-checkbox" class="note-video-attributes-loop-checkbox">'+
-                '<label for="note-video-attributes-loop-checkbox">'+lang.videoAttributes.loop+'</label>'+
-              '</div>'+
-            '</div>'+
-          '</div>';
+        var body='<div class="form-group"><div class="col-xs-3"></div><div class="col-xs-9 help-block">'+lang.videoAttributes.note+'</div></div>'+
+        '<div class="form-group"><label for="note-video-attributes-href" class="control-label col-xs-3">'+lang.videoAttributes.href+'</label><div class="input-group col-xs-9"><input type="text" id="note-video-attributes-href" class="note-video-attributes-href form-control"></div></div>'+
+        '<div class="form-group"><label for="note-video-attributes-video-size" class="control-label col-xs-3">'+lang.videoAttributes.videoSize+'</label><div class="input-group col-xs-9"><select id="note-video-attributes-size" class="note-video-attributes-size form-control col-xs-6"><option value="0" selected>'+lang.videoAttributes.videoOption0+'</option><option value="1">'+lang.videoAttributes.videoOption1+'</option><option value="2">'+lang.videoAttributes.videoOption2+'</option><option value="3">'+lang.videoAttributes.videoOption3+'</option><option value="4">'+lang.videoAttributes.videoOption4+'</option></select></div></div>'+
+        '<div class="form-group"><label for="note-video-attributes-video-alignment" class="control-label col-xs-3">'+lang.videoAttributes.alignment+'</label><div class="input-group col-xs-9"><select id="note-video-attributes-alignment" class="note-video-attributes-alignment form-control col-xs-6"><option value="none" selected>'+lang.videoAttributes.alignmentOption0+'</option><option value="left">'+lang.videoAttributes.alignmentOption1+'</option><option value="right">'+lang.videoAttributes.alignmentOption2+'</option><option value="initial">'+lang.videoAttributes.alignmentOption3+'</option><option value="inherit">'+lang.videoAttributes.alignmentOption4+'</option></select></div></div>'+
+        '<div class="form-group clearfix"><div class="control-label col-xs-3"></div><div class="input-group col-xs-9"><div class="checkbox checkbox-success"><input type="checkbox" id="note-video-attributes-suggested-checkbox" class="note-video-attributes-suggested-checkbox" checked><label for="note-video-attributes-suggested-checkbox">'+lang.videoAttributes.suggested+'</label></div></div></div>'+
+        '<div class="form-group clearfix"><div class="control-label col-xs-3"></div><div class="input-group col-xs-9"><div class="checkbox checkbox-success"><input type="checkbox" id="note-video-attributes-controls-checkbox" class="note-video-attributes-controls-checkbox" checked><label for="note-video-attributes-controls-checkbox">'+lang.videoAttributes.controls+'</label></div></div></div>'+
+        '<div class="form-group clearfix"><div class="control-label col-xs-3"></div><div class="input-group col-xs-9"><div class="checkbox checkbox-success"><input type="checkbox" id="note-video-attributes-autoplay-checkbox" class="note-video-attributes-autoplay-checkbox"><label for="note-video-attributes-autoplay-checkbox">'+lang.videoAttributes.autoplay+'</label></div></div></div>'+
+        '<div class="form-group clearfix"><div class="control-label col-xs-3"></div><div class="input-group col-xs-9"><div class="checkbox checkbox-success"><input type="checkbox" id="note-video-attributes-loop-checkbox" class="note-video-attributes-loop-checkbox"><label for="note-video-attributes-loop-checkbox">'+lang.videoAttributes.loop+'</label></div></div></div>';
         this.$dialog=ui.dialog({
           title:lang.videoAttributes.dialogTitle,
           body:body,
