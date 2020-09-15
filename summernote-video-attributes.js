@@ -173,16 +173,18 @@
               $videoLoop      = self.$dialog.find('.note-video-attributes-loop-checkbox'),
               url             = $videoHref.val(),
               $videoHTML      = $('<div/>');
+			  
+	      var videoWidth  = 'auto',
+              videoHeight = 'auto';
+				
           if ($videoSize.val() == 0) {
             $videoHTML.addClass('embed-responsive embed-responsive-16by9');
-            $videoHTML.css({'float': $videoAlignment.val()});
-            var videoWidth  = 'auto',
-                videoHeight = 'auto';
+            $videoHTML.css({'float': $videoAlignment.val()});            
           }
-          if ($videoSize.val() == 1) var videoWidth = '1280', videoHeight = '720';
-          if ($videoSize.val() == 2) var videoWidth = '853', videoHeight  = '480';
-          if ($videoSize.val() == 3) var videoWidth = '640', videoHeight  = '360';
-          if ($videoSize.val() == 4) var videoWidth = '560', videoHeight  = '315';
+          if ($videoSize.val() === 1) var videoWidth = '1280', videoHeight = '720';
+          if ($videoSize.val() === 2) var videoWidth = '853', videoHeight  = '480';
+          if ($videoSize.val() === 3) var videoWidth = '640', videoHeight  = '360';
+          if ($videoSize.val() === 4) var videoWidth = '560', videoHeight  = '315';
           var ytMatch    = url.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/);
           var igMatch    = url.match(/(?:www\.|\/\/)instagram\.com\/p\/(.[a-zA-Z0-9_-]*)/);
           var vMatch     = url.match(/\/\/vine\.co\/v\/([a-zA-Z0-9]+)/);
