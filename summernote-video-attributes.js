@@ -36,23 +36,31 @@
       }
     }
   });
-  $.extend($.summernote.options, {
-    videoAttributes: {
-      icon: '<i class="note-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" width="14" height="14"><path d="m 12.503106,4.03105 -3.087752,0 -0.09237,-0.72049 c 0,-0.41163 -0.333714,-0.74534 -0.745341,-0.74534 l -3.180124,0 c -0.411628,0 -0.745342,0.33372 -0.745342,0.74534 l -0.09237,0.72049 -3.062907,0 C 1.22246,4.03105 1,4.24109 1,4.51553 l 0,6.40993 c 0,0.27444 0.22246,0.50932 0.496894,0.50932 l 11.006212,0 C 12.77754,11.43478 13,11.1999 13,10.92546 L 13,4.51553 C 13,4.24109 12.77754,4.03105 12.503106,4.03105 Z M 7.00236,10.77794 c -1.687652,0 -3.055751,-1.3681 -3.055751,-3.05573 0,-1.68765 1.368099,-3.05574 3.055751,-3.05574 1.687652,0 3.055752,1.3681 3.055752,3.05574 0,1.6876 -1.3681,3.05573 -3.055752,3.05573 z m 5.426211,-5.43012 -2.608695,0 0,-0.77017 2.608695,0 0,0.77017 z M 8.876472,7.71575 A 1.8687454,1.8687454 0 0 1 7.007727,9.58449 1.8687454,1.8687454 0 0 1 5.138981,7.71575 1.8687454,1.8687454 0 0 1 7.007727,5.84701 1.8687454,1.8687454 0 0 1 8.876472,7.71575 Z"/></svg></i>'
-    }
-  });
-  $.extend($.summernote.plugins, {
+
+var defaults = {
+    showVideoSize: true,
+    showVideoAlignment: true,
+    showSuggestedVideos: true,
+    showPlayerControls: true,
+    showAutoplay: true,
+    showLoop: true,
+    icon: '<i class="note-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" width="14" height="14"><path d="m 12.503106,4.03105 -3.087752,0 -0.09237,-0.72049 c 0,-0.41163 -0.333714,-0.74534 -0.745341,-0.74534 l -3.180124,0 c -0.411628,0 -0.745342,0.33372 -0.745342,0.74534 l -0.09237,0.72049 -3.062907,0 C 1.22246,4.03105 1,4.24109 1,4.51553 l 0,6.40993 c 0,0.27444 0.22246,0.50932 0.496894,0.50932 l 11.006212,0 C 12.77754,11.43478 13,11.1999 13,10.92546 L 13,4.51553 C 13,4.24109 12.77754,4.03105 12.503106,4.03105 Z M 7.00236,10.77794 c -1.687652,0 -3.055751,-1.3681 -3.055751,-3.05573 0,-1.68765 1.368099,-3.05574 3.055751,-3.05574 1.687652,0 3.055752,1.3681 3.055752,3.05574 0,1.6876 -1.3681,3.05573 -3.055752,3.05573 z m 5.426211,-5.43012 -2.608695,0 0,-0.77017 2.608695,0 0,0.77017 z M 8.876472,7.71575 A 1.8687454,1.8687454 0 0 1 7.007727,9.58449 1.8687454,1.8687454 0 0 1 5.138981,7.71575 1.8687454,1.8687454 0 0 1 7.007727,5.84701 1.8687454,1.8687454 0 0 1 8.876472,7.71575 Z"/></svg></i>'
+};
+
+
+
+$.extend($.summernote.plugins, {
     'videoAttributes': function (context) {
       var self      = this,
           ui        = $.summernote.ui,
           $editor   = context.layoutInfo.editor,
           $editable = context.layoutInfo.editable,
-          options   = context.options,
+          options = $.extend({}, defaults, context.options),          
           lang      = options.langInfo;
       context.memo('button.videoAttributes', function() {
-        var button = ui.button({
-          contents: options.videoAttributes.icon,
-		  container: false,
+          var button = ui.button({
+              contents: options.icon,
+            container: false,
           tooltip:  lang.videoAttributes.tooltip,
           click:    function (e) {
             context.invoke('saveRange');
@@ -61,79 +69,114 @@
         });
         return button.render();
       });
+
       this.initialize = function () {
         var $container = options.dialogsInBody ? $(document.body) : $editor;
-        var body = 
-        '<div class="form-group">' +
-        '  <div class="col-xs-3"></div>' +
-        '  <div class="col-xs-9 help-block">' + lang.videoAttributes.note + '</div>' +
-        '</div>' +
-        '<div class="form-group">' +
-        '  <label for="note-video-attributes-href" class="control-label col-xs-3">' + lang.videoAttributes.href + '</label>' +
-        '  <div class="input-group col-xs-9">' +
-        '    <input type="text" id="note-video-attributes-href" class="note-video-attributes-href form-control">' +
-        '  </div>' +
-        '</div>' +
-        '<div class="form-group">' +
-        '  <label for="note-video-attributes-video-size" class="control-label col-xs-3">' + lang.videoAttributes.videoSize + '</label>' +
-        '  <div class="input-group col-xs-9">' +
-        '    <select id="note-video-attributes-size" class="note-video-attributes-size form-control col-xs-6">' +
-        '      <option value="0" selected>' + lang.videoAttributes.videoOption0 + '</option>' +
-        '      <option value="1">' + lang.videoAttributes.videoOption1 + '</option>' +
-        '      <option value="2">' + lang.videoAttributes.videoOption2 + '</option>' +
-        '      <option value="3">' + lang.videoAttributes.videoOption3 + '</option>' +
-        '      <option value="4">' + lang.videoAttributes.videoOption4 + '</option>' +
-        '    </select>' +
-        '  </div>' +
-        '</div>' +
-        '<div class="form-group">' +
-        '  <label for="note-video-attributes-video-alignment" class="control-label col-xs-3">' + lang.videoAttributes.alignment + '</label>' +
-        '  <div class="input-group col-xs-9">' +
-        '    <select id="note-video-attributes-alignment" class="note-video-attributes-alignment form-control col-xs-6">' +
-        '      <option value="none" selected>' + lang.videoAttributes.alignmentOption0 + '</option>' +
-        '      <option value="left">' + lang.videoAttributes.alignmentOption1 + '</option>' +
-        '      <option value="right">' + lang.videoAttributes.alignmentOption2 + '</option>' +
-        '      <option value="initial">' + lang.videoAttributes.alignmentOption3 + '</option>' +
-        '      <option value="inherit">' + lang.videoAttributes.alignmentOption4 + '</option>' +
-        '    </select>' +
-        '  </div>' +
-        '</div>'+
-        '<div class="form-group clearfix">' +
-        '  <div class="control-label col-xs-3"></div>' +
-        '  <div class="input-group col-xs-9">' +
-        '    <div class="checkbox checkbox-success">' +
-        '      <input type="checkbox" id="note-video-attributes-suggested-checkbox" class="note-video-attributes-suggested-checkbox" checked>' +
-        '      <label for="note-video-attributes-suggested-checkbox">' + lang.videoAttributes.suggested + '</label>' +
-        '    </div>' +
-        '  </div>' +
-        '</div>'+
-        '<div class="form-group clearfix">' +
-        '  <div class="control-label col-xs-3"></div>' +
-        '  <div class="input-group col-xs-9">' +
-        '    <div class="checkbox checkbox-success">' +
-        '      <input type="checkbox" id="note-video-attributes-controls-checkbox" class="note-video-attributes-controls-checkbox" checked>' +
-        '      <label for="note-video-attributes-controls-checkbox">' + lang.videoAttributes.controls + '</label>' +
-        '    </div>' +
-        '  </div>' +
-        '</div>'+
-        '<div class="form-group clearfix">' +
-        '  <div class="control-label col-xs-3"></div>' +
-        '  <div class="input-group col-xs-9">' +
-        '    <div class="checkbox checkbox-success">' +
-        '      <input type="checkbox" id="note-video-attributes-autoplay-checkbox" class="note-video-attributes-autoplay-checkbox">' +
-        '      <label for="note-video-attributes-autoplay-checkbox">' + lang.videoAttributes.autoplay + '</label>' +
-        '    </div>' +
-        '  </div>' +
-        '</div>'+
-        '<div class="form-group clearfix">' +
-        '  <div class="control-label col-xs-3"></div>' +
-        '  <div class="input-group col-xs-9">' +
-        '    <div class="checkbox checkbox-success">' +
-        '      <input type="checkbox" id="note-video-attributes-loop-checkbox" class="note-video-attributes-loop-checkbox">' +
-        '      <label for="note-video-attributes-loop-checkbox">' + lang.videoAttributes.loop + '</label>' +
-        '    </div>' +
-        '  </div>' +
-        '</div>';
+          var body =
+              '<div class="form-group">' +
+              '  <div class="col-xs-3"></div>' +
+              '  <div class="col-xs-9 help-block">' + lang.videoAttributes.note + '</div>' +
+              '</div>' +
+              '<div class="form-group">' +
+              '  <label for="note-video-attributes-href" class="control-label col-xs-3">' + lang.videoAttributes.href + '</label>' +
+              '  <div class="input-group col-xs-9">';
+
+
+          var a = options.videoAttributes.videoUrls;
+          var b = Array.isArray(options.videoAttributes.videoUrls);
+
+          if ((options.videoAttributes.videoUrls !== undefined) && Array.isArray(options.videoAttributes.videoUrls)) {
+              body += ' <select id="note-video-attributes-href" class="note-video-attributes-href form-control">';
+              options.videoAttributes.videoUrls.forEach(element => body += ' <option value="' + element + '">' + element + '</option>');
+              body += ' </select>';
+          }
+          else {
+              body += '<input type="text" id="note-video-attributes-href" class="note-video-attributes-href form-control">';
+          }
+
+                          
+          body += '  </div>' +
+                  '</div>';
+
+
+          if (options.videoAttributes.showVideoSize === true) {
+              body += '<div class="form-group">' +
+                  '  <label for="note-video-attributes-video-size" class="control-label col-xs-3">' + lang.videoAttributes.videoSize + '</label>' +
+                  '  <div class="input-group col-xs-9">' +
+                  '    <select id="note-video-attributes-size" class="note-video-attributes-size form-control col-xs-6" readonly="readonly">' +
+                  '      <option value="0">' + lang.videoAttributes.videoOption0 + '</option>' +
+                  '      <option value="1">' + lang.videoAttributes.videoOption1 + '</option>' +
+                  '      <option value="2">' + lang.videoAttributes.videoOption2 + '</option>' +
+                  '      <option value="3" selected>' + lang.videoAttributes.videoOption3 + '</option>' +
+                  '      <option value="4">' + lang.videoAttributes.videoOption4 + '</option>' +
+                  '    </select>' +
+                  '  </div>' +
+                  '</div>';
+          }
+
+          if (options.videoAttributes.showVideoAlignment === true) {
+              body += '<div class="form-group">' +
+                  '  <label for="note-video-attributes-video-alignment" class="control-label col-xs-3">' + lang.videoAttributes.alignment + '</label>' +
+                  '  <div class="input-group col-xs-9">' +
+                  '    <select id="note-video-attributes-alignment" class="note-video-attributes-alignment form-control col-xs-6">' +
+                  '      <option value="none" selected>' + lang.videoAttributes.alignmentOption0 + '</option>' +
+                  '      <option value="left">' + lang.videoAttributes.alignmentOption1 + '</option>' +
+                  '      <option value="right">' + lang.videoAttributes.alignmentOption2 + '</option>' +
+                  '      <option value="initial">' + lang.videoAttributes.alignmentOption3 + '</option>' +
+                  '      <option value="inherit">' + lang.videoAttributes.alignmentOption4 + '</option>' +
+                  '    </select>' +
+                  '  </div>' +
+                  '</div>';
+          }
+
+          if (options.videoAttributes.showSuggestedVideos === true) {
+              body += '<div class="form-group clearfix">' +
+                  '  <div class="control-label col-xs-3"></div>' +
+                  '  <div class="input-group col-xs-9">' +
+                  '    <div class="checkbox checkbox-success">' +
+                  '      <input type="checkbox" id="note-video-attributes-suggested-checkbox" class="note-video-attributes-suggested-checkbox" checked>' +
+                  '      <label for="note-video-attributes-suggested-checkbox">' + lang.videoAttributes.suggested + '</label>' +
+                  '    </div>' +
+                  '  </div>' +
+                  '</div>';
+          }
+
+          if (options.videoAttributes.showPlayerControls === true) {
+              body += '<div class="form-group clearfix">' +
+                  '  <div class="control-label col-xs-3"></div>' +
+                  '  <div class="input-group col-xs-9">' +
+                  '    <div class="checkbox checkbox-success">' +
+                  '      <input type="checkbox" id="note-video-attributes-controls-checkbox" class="note-video-attributes-controls-checkbox" checked>' +
+                  '      <label for="note-video-attributes-controls-checkbox">' + lang.videoAttributes.controls + '</label>' +
+                  '    </div>' +
+                  '  </div>' +
+                  '</div>';
+          }
+
+          if (options.videoAttributes.showAutoplay === true) {
+              body += '<div class="form-group clearfix">' +
+                  '  <div class="control-label col-xs-3"></div>' +
+                  '  <div class="input-group col-xs-9">' +
+                  '    <div class="checkbox checkbox-success">' +
+                  '      <input type="checkbox" id="note-video-attributes-autoplay-checkbox" class="note-video-attributes-autoplay-checkbox">' +
+                  '      <label for="note-video-attributes-autoplay-checkbox">' + lang.videoAttributes.autoplay + '</label>' +
+                  '    </div>' +
+                  '  </div>' +
+                  '</div>';
+          }
+
+          if (options.videoAttributes.showLoop === true) {
+              body += '<div class="form-group clearfix">' +
+                  '  <div class="control-label col-xs-3"></div>' +
+                  '  <div class="input-group col-xs-9">' +
+                  '    <div class="checkbox checkbox-success">' +
+                  '      <input type="checkbox" id="note-video-attributes-loop-checkbox" class="note-video-attributes-loop-checkbox">' +
+                  '      <label for="note-video-attributes-loop-checkbox">' + lang.videoAttributes.loop + '</label>' +
+                  '    </div>' +
+                  '  </div>' +
+                  '</div>';
+          }
+
         this.$dialog = ui.dialog({
           title:  lang.videoAttributes.dialogTitle,
           body:   body,
@@ -173,18 +216,17 @@
               $videoLoop      = self.$dialog.find('.note-video-attributes-loop-checkbox'),
               url             = $videoHref.val(),
               $videoHTML      = $('<div/>');
-			  
-	      var videoWidth  = 'auto',
-              videoHeight = 'auto';
-				
-          if ($videoSize.val() == 0) {
+          if ($videoSize.val() === 0) {
             $videoHTML.addClass('embed-responsive embed-responsive-16by9');
             $videoHTML.css({'float': $videoAlignment.val()});            
           }
-          if ($videoSize.val() === 1) var videoWidth = '1280', videoHeight = '720';
-          if ($videoSize.val() === 2) var videoWidth = '853', videoHeight  = '480';
-          if ($videoSize.val() === 3) var videoWidth = '640', videoHeight  = '360';
-          if ($videoSize.val() === 4) var videoWidth = '560', videoHeight  = '315';
+
+          var videoWidth = 'auto', videoHeight = 'auto';
+
+          if ($videoSize.val() === "1") videoWidth = '1280', videoHeight = '720';
+          if ($videoSize.val() === "2") videoWidth = '853', videoHeight  = '480';
+          if ($videoSize.val() === "3") videoWidth = '640', videoHeight  = '360';
+          if ($videoSize.val() === "4") videoWidth = '560', videoHeight  = '315';
           var ytMatch    = url.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/);
           var igMatch    = url.match(/(?:www\.|\/\/)instagram\.com\/p\/(.[a-zA-Z0-9_-]*)/);
           var vMatch     = url.match(/\/\/vine\.co\/v\/([a-zA-Z0-9]+)/);
@@ -250,7 +292,7 @@
               .attr('width', videoWidth)
               .attr('height', videoHeight);
           }
-          if ($videoSize.val() == 0) $video.addClass('embed-responsive'); else $video.css({'float': $videoAlignment.val()});
+          if ($videoSize.val() === 0) $video.addClass('embed-responsive'); else $video.css({'float': $videoAlignment.val()});
           $video.addClass('note-video-clip');
           $videoHTML.html($video);
           context.invoke('restoreRange');
